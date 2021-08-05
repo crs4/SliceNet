@@ -2,10 +2,9 @@ import os
 import argparse
 import numpy as np
 from PIL import Image
-from tqdm import tqdm
+
 import matplotlib.pyplot as plt
 import torch
-import time
 
 from slice_model import SliceNet
 from misc import tools, eval
@@ -14,11 +13,6 @@ from misc import tools, eval
 def_img = 'example/001ad2ad14234e06b2d996d71bb96fc4_color.png'#
 
 def_pth ='ckpt/resnet50_m3d.pth' 
-##def_pth ='ckpt/resnet50_s3d.pth'
-
-
-def_output_dir = 'results/'
-
  
 
 if __name__ == '__main__':

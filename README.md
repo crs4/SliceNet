@@ -23,6 +23,7 @@ This repo is a **python** implementation where you can test **depth inference** 
 ## Requirements
 - Python >=3.6
 - pytorch>=1.0.1
+- torchvision
 - numpy
 - PIL
 - matplotlib.pyplot
@@ -50,7 +51,7 @@ NB. all depth values are encoded as [meters]. Measures over 16 meters or no read
 ## Inference on equirectagular images	
 Here an example of inferring using the pre-trained model on Matterport3D:
 ```
-python inference.py --pth ckpt/resnet50_m3d.pth --img input/ef9c0198541649d4987f2b87be57d6c3_color.png
+python inference.py --pth ckpt/resnet50_m3d.pth --img example/001ad2ad14234e06b2d996d71bb96fc4_color.png
 
 ```    
     - `--pth` path to the trained model.

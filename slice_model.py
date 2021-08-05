@@ -2,9 +2,10 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
 import torchvision.models as models
+
 import functools
-import time
 
 ENCODER_RESNET = [
     'resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152',
@@ -15,6 +16,7 @@ ENCODER_RESNET = [
 def lr_pad(x, padding=1):
     ''' Pad left/right-most to each other instead of zero padding '''
     return torch.cat([x[..., -padding:], x, x[..., :padding]], dim=3)
+
 class LR_PAD(nn.Module):
     ''' Pad left/right-most to each other instead of zero padding '''
     def __init__(self, padding=1):
@@ -23,6 +25,7 @@ class LR_PAD(nn.Module):
 
     def forward(self, x):
         return lr_pad(x, self.padding)
+
 def wrap_lr_pad(net):
     for name, m in net.named_modules():
         if not isinstance(m, nn.Conv2d):
@@ -105,7 +108,7 @@ class Slicing(nn.Module):
 
         #####HorizonNet-style upsampling        
         x = torch.cat([x[..., -1:], x, x[..., :1]], 3) ## plus 2 on W
-        x = F.interpolate(x, size=(x.shape[2], out_w + 2 * factor), mode='bilinear', align_corners=False) ####NB interpolating only W
+        x = F.interpolate(x, size=(x.shape[2], out_w + 2 * factor), mode='bilinear', align_corners=False)
         x = x[..., factor:-factor] ##minus 2 on W
         
         return x
