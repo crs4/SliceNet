@@ -45,6 +45,7 @@ Copy to your local ./ckpt directory.
 	- COMING SOON
 - [resnet50_s3d.pth]
 	- Trained with ResNet50 using Structured3D dataset and their official splitting.
+	- COMING SOON
 - [resnet50_360D.pth]
 	- COMING SOON
 
