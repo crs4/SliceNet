@@ -4,7 +4,6 @@ Pytorch implementation of the CVPR 2021 oral paper: SliceNet: deep dense depth e
 Paper at:
 https://openaccess.thecvf.com/content/CVPR2021/papers/Pintore_SliceNet_Deep_Dense_Depth_Estimation_From_a_Single_Indoor_Panorama_CVPR_2021_paper.pdf
 
-![](assets/intro.png)
 
 We present a novel deep neural network to estimate a depth map from a single monocular indoor panorama, called SliceNet.
 The network directly works on the equirectangular projection, exploiting the properties of indoor 360 images.
@@ -18,7 +17,9 @@ This repo is a **python** implementation where you can test **depth inference** 
 ![](assets/overview.png)
 
 ## Updates
-* 2020-07-21: Network source code and demo released
+* 2021-08-13: IMPORTANT: Fixed bug in weights init: model and pre-trained weights updated
+	- REPLACE PREVIOUS MODEL AND WEIGHTS
+* 2021-07-21: Network source code and demo released
 
 ## Requirements
 - Python >=3.6
@@ -36,12 +37,13 @@ Copy to your local ./ckpt directory.
 	- As in previous comparable works we resize the resolution of equirectangular image and depth map into 512 × 1024.
 	- Stitching the original 18-poses format to equirectangular have been perfomed following the official procedure from https://github.com/niessner/Matterport/blob/master/data_organization.md, based on
 	the methods/tools of Zhang https://github.com/yindaz/PanoBasic.
-- [resnet50_stanford.pth](https://vicserver.crs4.it/slicenet/resnet50_stanford.pth)
+- [resnet50_stanford.pth]
 	- Trained with ResNet50 using Stanford-2D-3D-S dataset http://buildingparser.stanford.edu/dataset.html. 
 	- As in previous comparable works we adopt the official Fold#1 as split thus taking fifth area (area 5) for testing and the others for training.
 	- As in previous comparable works we resize the resolution of equirectangular image and depth map into 512 × 1024. 
 	- Invalid measures are masked as 0.
-- [resnet50_s3d.pth](https://vicserver.crs4.it/slicenet/resnet50_s3d.pth)
+	- COMING SOON
+- [resnet50_s3d.pth]
 	- Trained with ResNet50 using Structured3D dataset and their official splitting.
 - [resnet50_360D.pth]
 	- COMING SOON

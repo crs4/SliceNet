@@ -2,10 +2,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
 import torchvision.models as models
-
 import functools
+import time
 
 ENCODER_RESNET = [
     'resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152',
@@ -16,7 +15,6 @@ ENCODER_RESNET = [
 def lr_pad(x, padding=1):
     ''' Pad left/right-most to each other instead of zero padding '''
     return torch.cat([x[..., -padding:], x, x[..., :padding]], dim=3)
-
 class LR_PAD(nn.Module):
     ''' Pad left/right-most to each other instead of zero padding '''
     def __init__(self, padding=1):
@@ -25,7 +23,6 @@ class LR_PAD(nn.Module):
 
     def forward(self, x):
         return lr_pad(x, self.padding)
-
 def wrap_lr_pad(net):
     for name, m in net.named_modules():
         if not isinstance(m, nn.Conv2d):
@@ -108,8 +105,11 @@ class Slicing(nn.Module):
 
         #####HorizonNet-style upsampling        
         x = torch.cat([x[..., -1:], x, x[..., :1]], 3) ## plus 2 on W
-        x = F.interpolate(x, size=(x.shape[2], out_w + 2 * factor), mode='bilinear', align_corners=False)
+        x = F.interpolate(x, size=(x.shape[2], out_w + 2 * factor), mode='bilinear', align_corners=False) ####NB interpolating only W
         x = x[..., factor:-factor] ##minus 2 on W
+
+        ##SIMPLEST
+        ##x = F.interpolate(x, size=(x.shape[2], out_w), mode='bilinear', align_corners=False)
         
         return x
 
@@ -150,10 +150,10 @@ class SliceNet(nn.Module):
 
         self.full_size = full_size 
 
-        self.out_w_size = 512
+        ##self.out_w_size = 512
 
-        if(self.full_size):
-            self.out_w_size = 1024                     
+        ##if(self.full_size):
+            ##self.out_w_size = 1024                     
 
         self.feature_extractor = Resnet(backbone, pretrained=True)
                 
@@ -165,7 +165,9 @@ class SliceNet(nn.Module):
 
             if(self.full_size):
                 c_last *= 2
-                     
+         
+        ##print('c_last',c_last)
+
         self.slicing_module = MultiSlicing(c1, c2, c3, c4, self.ch_scale)
         
         self.bi_rnn = nn.LSTM(input_size=c_last,
@@ -204,7 +206,7 @@ class SliceNet(nn.Module):
         ''' Pad left/right-most to each other instead of zero padding '''       
         wrap_lr_pad(self)
               
-        self.apply(xavier_init)
+        ##self.apply(xavier_init)
 
     def _prepare_x(self, x):
         if self.x_mean.device != x.device:
