@@ -221,7 +221,7 @@ class SliceNet(nn.Module):
         feature = self.slicing_module(conv_list, x.shape[3])
                                
         feature = feature.permute(2, 0, 1)
-        
+
         output, hidden = self.bi_rnn(feature)
                   
         output = self.drop_out(output)
@@ -236,3 +236,75 @@ class SliceNet(nn.Module):
               
                                               
         return depth
+
+
+if __name__ == '__main__':
+    print('testing SliceNet')
+
+    device = torch.device('cuda')
+
+    net = SliceNet('resnet50',full_size = True).to(device)
+            
+    pytorch_total_params = sum(p.numel() for p in net.parameters())
+
+    for name, param in net.named_parameters():
+        if param.requires_grad:
+            print(name, param.numel())
+
+    print('pytorch_total_params', pytorch_total_params)
+
+    pytorch_trainable_params = sum(p.numel() for p in net.parameters() if p.requires_grad)
+
+    print('pytorch_trainable_params', pytorch_trainable_params)
+
+    decoder_params = 0
+
+    for name, param in net.named_parameters():
+        if (param.requires_grad and ('decoder' in name) ):
+            print(name, param.numel())
+            decoder_params += param.numel()
+
+    print('equi decoder parameters', decoder_params)
+
+    rnn_params = 0
+
+    for name, param in net.named_parameters():
+        if (param.requires_grad and ('rnn' in name) ):
+            print(name, param.numel())
+            rnn_params += param.numel()
+
+    print('rnn decoder parameters', rnn_params)
+
+    h_encoder_params = 0
+
+    for name, param in net.named_parameters():
+        if (param.requires_grad and ('reduce_height_module' in name) ):
+            print(name, param.numel())
+            h_encoder_params += param.numel()
+
+    print('height ecoder parameters', h_encoder_params)
+
+    encoder_params = 0
+
+    for name, param in net.named_parameters():
+        if (param.requires_grad and ('feature_extractor' in name) ):
+            print(name, param.numel())
+            encoder_params += param.numel()
+
+    print('resnet encoder parameters', encoder_params)
+
+    ##batch = torch.ones(1, 3, 256, 512).to(device)
+    batch = torch.ones(1, 3, 512, 1024).to(device)
+
+    ##with torch.no_grad():
+    torch.cuda.synchronize()
+    t0 = time.time()
+    out_depth = net(batch)
+    torch.cuda.synchronize()
+    elapsed_fp = time.time()-t0
+
+    print('time cost',elapsed_fp)
+               
+    print('out_depth shape', out_depth.shape)
+
+    print('test done')

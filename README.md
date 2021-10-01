@@ -17,6 +17,7 @@ This repo is a **python** implementation where you can test **depth inference** 
 ![](assets/overview.png)
 
 ## Updates
+* 2021-10-1: Inference script updated with valid mask and ground truth loader
 * 2021-08-13: IMPORTANT: Fixed bug in weights init: model and pre-trained weights updated
 	- REPLACE PREVIOUS MODEL AND WEIGHTS
 * 2021-07-21: Network source code and demo released
