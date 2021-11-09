@@ -38,19 +38,21 @@ Copy to your local ./ckpt directory.
 	- As in previous comparable works we resize the resolution of equirectangular image and depth map into 512 × 1024.
 	- Stitching the original 18-poses format to equirectangular have been perfomed following the official procedure from https://github.com/niessner/Matterport/blob/master/data_organization.md, based on
 	the methods/tools of Zhang https://github.com/yindaz/PanoBasic.
-- [resnet50_stanford.pth]
+	- All depth values are encoded as [meters]. Measures over 16 meters or no reading are masked as 0 value.
+- [resnet50_stanford.pth](https://vicserver.crs4.it/slicenet/resnet50_stanford.pth)
 	- Trained with ResNet50 using Stanford-2D-3D-S dataset http://buildingparser.stanford.edu/dataset.html. 
 	- As in previous comparable works we adopt the official Fold#1 as split thus taking fifth area (area 5) for testing and the others for training.
 	- As in previous comparable works we resize the resolution of equirectangular image and depth map into 512 × 1024. 
 	- Invalid measures are masked as 0.
-	- COMING SOON
-- [resnet50_s3d.pth]
-	- Trained with ResNet50 using Structured3D dataset and their official splitting.
-	- COMING SOON
-- [resnet50_360D.pth]
-	- COMING SOON
+	- All depth values are encoded as [meters]. Measures over 16 meters or no reading are masked as 0 value.
+- [resnet50_s3d.pth](https://vicserver.crs4.it/slicenet/resnet50_s3d.pth)
+	- Trained with ResNet50 using Structured3D dataset and their official splitting. please refer to their original release to filter wrong scenes (https://github.com/bertjiazheng/Structured3D)
+	- All depth values are encoded as [meters]. Measures over 16 meters or no reading are masked as 0 value.
+- [resnet50_360D.pth](https://vicserver.crs4.it/slicenet/resnet50_360D.pth)
+	- Trained with ResNet50 with 360D dataset (https://vcl.iti.gr/360-dataset/) at 256x512.
+	- All depth values are encoded as [millimeters] masked between 16 to 0 meters.
 
-NB. all depth values are encoded as [meters]. Measures over 16 meters or no reading are masked as 0 value.  
+NB.   
 
 ## Inference on equirectagular images	
 Here an example of inferring using the pre-trained model on Matterport3D:
