@@ -48,9 +48,9 @@ Copy to your local ./ckpt directory.
 - [resnet50_s3d.pth](https://vicserver.crs4.it/slicenet/resnet50_s3d.pth)
 	- Trained with ResNet50 using Structured3D dataset and their official splitting. please refer to their original release to filter wrong scenes (https://github.com/bertjiazheng/Structured3D)
 	- All depth values are encoded as [meters]. Measures over 16 meters or no reading are masked as 0 value.
-- [resnet50_360D.pth](https://vicserver.crs4.it/slicenet/resnet50_360D.pth)
-	- Trained with ResNet50 with 360D dataset (https://vcl.iti.gr/360-dataset/) at 256x512.
-	- All depth values are encoded as [millimeters] masked between 16 to 0 meters.
+- [resnet50_360D.pth]
+	- COMING SOON
+	- 
 
 NB.   
 
