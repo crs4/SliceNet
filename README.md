@@ -11,7 +11,7 @@ Starting from the fact that gravity plays an important role in the design and co
 Our design makes it possible to maintain high-resolution information in the extracted features even with a deep network.
 The experimental results demonstrate that our method outperforms current state-of-the-art solutions in prediction accuracy, particularly for real-world data.
 
-This repo is a **python** implementation where you can test **depth inference** on an indoor equirectangular image. The code is intended as a sample implementation and is a cleaned-up version for release. Because of this the visual results may be slightly different in some scenes. 
+This repo is a **python** implementation where you can test **depth inference** on an indoor equirectangular image. The code is intended as a sample implementation and is a cleaned-up version for release. Because of this and the different preparation of third-party datasets the visual results may be slightly different in some scenes. 
 
 **Method Pipeline overview**:
 ![](assets/overview.png)
@@ -48,9 +48,7 @@ Copy to your local ./ckpt directory.
 - [resnet50_s3d.pth](https://vicserver.crs4.it/slicenet/resnet50_s3d.pth)
 	- Trained with ResNet50 using Structured3D dataset and their official splitting. please refer to their original release to filter wrong scenes (https://github.com/bertjiazheng/Structured3D)
 	- All depth values are encoded as [meters]. Measures over 16 meters or no reading are masked as 0 value.
-- [resnet50_360D.pth]
-	- COMING SOON
-	- 
+
 
 NB.   
 
