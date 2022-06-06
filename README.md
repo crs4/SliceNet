@@ -11,7 +11,7 @@ Starting from the fact that gravity plays an important role in the design and co
 Our design makes it possible to maintain high-resolution information in the extracted features even with a deep network.
 The experimental results demonstrate that our method outperforms current state-of-the-art solutions in prediction accuracy, particularly for real-world data.
 
-This repo is a **python** implementation where you can test **depth inference** on an indoor equirectangular image.
+This repo is a **python** implementation where you can test **depth inference** on an indoor equirectangular image. The code is intended as a sample implementation and is a cleaned-up version for release. Because of this the visual results may be slightly different in some scenes. 
 
 **Method Pipeline overview**:
 ![](assets/overview.png)
