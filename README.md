@@ -17,6 +17,7 @@ This repo is a **python** implementation where you can test **depth inference** 
 ![](assets/overview.png)
 
 ## Updates
+* 2025-02-05 Links pre-trained weights updated
 * 2021-10-1: Inference script updated with valid mask and ground truth loader
 * 2021-08-13: IMPORTANT: Fixed bug in weights init: model and pre-trained weights updated
 	- REPLACE PREVIOUS MODEL AND WEIGHTS
@@ -32,20 +33,20 @@ This repo is a **python** implementation where you can test **depth inference** 
 - tqdm
 
 ## Pretrained weights.
-Copy to your local ./ckpt directory.
-- [resnet50_m3d.pth](https://vicserver.crs4.it/slicenet/resnet50_m3d.pth)
+Download and copy to your local ./ckpt directory from https://vicserver.crs4.it/slicenet/.
+- [resnet50_m3d.pth]
     - Trained with ResNet50 using Matterport3D dataset and their original training/testing splitting https://niessner.github.io/Matterport/. 
 	- As in previous comparable works we resize the resolution of equirectangular image and depth map into 512 × 1024.
 	- Stitching the original 18-poses format to equirectangular have been perfomed following the official procedure from https://github.com/niessner/Matterport/blob/master/data_organization.md, based on
 	the methods/tools of Zhang https://github.com/yindaz/PanoBasic.
 	- All depth values are encoded as [meters]. Measures over 16 meters or no reading are masked as 0 value.
-- [resnet50_stanford.pth](https://vicserver.crs4.it/slicenet/resnet50_stanford.pth)
+- [resnet50_stanford.pth]
 	- Trained with ResNet50 using Stanford-2D-3D-S dataset http://buildingparser.stanford.edu/dataset.html. 
 	- As in previous comparable works we adopt the official Fold#1 as split thus taking fifth area (area 5) for testing and the others for training.
 	- As in previous comparable works we resize the resolution of equirectangular image and depth map into 512 × 1024. 
 	- Invalid measures are masked as 0.
 	- All depth values are encoded as [meters]. Measures over 16 meters or no reading are masked as 0 value.
-- [resnet50_s3d.pth](https://vicserver.crs4.it/slicenet/resnet50_s3d.pth)
+- [resnet50_s3d.pth]
 	- Trained with ResNet50 using Structured3D dataset and their official splitting. please refer to their original release to filter wrong scenes (https://github.com/bertjiazheng/Structured3D)
 	- All depth values are encoded as [meters]. Measures over 16 meters or no reading are masked as 0 value.
 
